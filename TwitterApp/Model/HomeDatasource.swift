@@ -9,8 +9,13 @@
 import LBTAComponents
 
 class HomeDatasource: Datasource {
-    let words = ["user1", "user2", "user3"]
     
+    let users: [User] = {
+        let kratos = User(name: "Kratos", username: "@godofwar", bioText: "Born in the Greek city-state of Sparta, is the demigod son of Zeus and a mortal woman named Callisto", profileImage: #imageLiteral(resourceName: "profile_image"))
+        let zeus  = User(name: "Zeus", username: "@godofthunder", bioText: "The youngest child of the Titan King Cronos, who ascended to become the King of Olympus and the God of the Sky Thunder, Lightning, and the Heavens.", profileImage: #imageLiteral(resourceName: "zeus"))
+        return [kratos, zeus]
+    }()
+        
     override func headerClasses() -> [DatasourceCell.Type]? {
         return [UserHeader.self]
     }
@@ -24,10 +29,10 @@ class HomeDatasource: Datasource {
     }
     
     override func numberOfItems(_ section: Int) -> Int {
-        return words.count
+        return users.count
     }
     
     override func item(_ indexPath: IndexPath) -> Any? {
-        return words[indexPath.item]
+        return users[indexPath.item]
     }
 }
