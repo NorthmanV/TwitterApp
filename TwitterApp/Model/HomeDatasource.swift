@@ -15,6 +15,8 @@ class HomeDatasource: Datasource {
         let zeus  = User(name: "Zeus", username: "@godofthunder", bioText: "The youngest child of the Titan King Cronos, who ascended to become the King of Olympus and the God of the Sky Thunder, Lightning, and the Heavens.", profileImage: #imageLiteral(resourceName: "zeus"))
         return [kratos, zeus]
     }()
+    
+    let tweets = ["tweet1", "tweet2"]
         
     override func headerClasses() -> [DatasourceCell.Type]? {
         return [UserHeader.self]
@@ -25,10 +27,17 @@ class HomeDatasource: Datasource {
     }
     
     override func cellClasses() -> [DatasourceCell.Type] {
-        return [UserCell.self]
+        return [UserCell.self, TweetCell.self]
+    }
+    
+    override func numberOfSections() -> Int {
+        return 2
     }
     
     override func numberOfItems(_ section: Int) -> Int {
+        if section == 1 {
+            return tweets.count
+        }
         return users.count
     }
     
