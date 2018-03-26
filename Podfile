@@ -7,5 +7,6 @@ target 'TwitterApp' do
 
   # Pods for TwitterApp
   pod 'LBTAComponents'
+  pod 'TRON'
 
 end

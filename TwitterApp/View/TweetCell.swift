@@ -54,12 +54,11 @@ class TweetCell: DatasourceCell {
             let attributedText = NSMutableAttributedString(string: tweet.user.name, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16)])
             let usernameString = "  \(tweet.user.username)\n"
             attributedText.append(NSAttributedString(string: usernameString, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15) ,NSAttributedStringKey.foregroundColor: UIColor.gray]))
-            
+
             let paragtaphStyle = NSMutableParagraphStyle()
             paragtaphStyle.lineSpacing = 4
             let range = NSMakeRange(0, attributedText.length)
             attributedText.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragtaphStyle, range: range)
-
             
             attributedText.append(NSAttributedString(string: tweet.message, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15)]))
             
@@ -106,8 +105,6 @@ class TweetCell: DatasourceCell {
         
     }
 }
-
-
 
 
 

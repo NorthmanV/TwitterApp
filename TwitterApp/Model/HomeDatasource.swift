@@ -7,15 +7,24 @@
 //
 
 import LBTAComponents
+import TRON
+import SwiftyJSON
 
-class HomeDatasource: Datasource {
+class HomeDatasource: Datasource, JSONDecodable {
     
-    let users: [User] = {
-        let kratos = User(name: "Kratos", username: "@godofwar", bioText: "Born in the Greek city-state of Sparta, is the demigod son of Zeus and a mortal woman named Callisto", profileImage: #imageLiteral(resourceName: "profile_image"))
-        let zeus  = User(name: "Zeus", username: "@godofthunder", bioText: "The youngest child of the Titan King Cronos, who ascended to become the King of Olympus and the God of the Sky Thunder, Lightning, and the Heavens.", profileImage: #imageLiteral(resourceName: "zeus"))
-        return [kratos, zeus]
-    }()
+    var users = [User]()
     
+    required init(json: JSON) throws {
+        let array = json["users"].array
+        for user in array! {
+            let name = user["name"].stringValue
+            let username = user["username"].stringValue
+            let bio = user["bio"].stringValue
+            let user = User(name: name, username: username, bioText: bio, profileImage: UIImage())
+            users.append(user)
+        }
+    }
+
     let tweets: [Tweet] = {
         let kratos = User(name: "Kratos", username: "@godofwar", bioText: "Born in the Greek city-state of Sparta, is the demigod son of Zeus and a mortal woman named Callisto", profileImage: #imageLiteral(resourceName: "profile_image"))
         let tweet1 = Tweet(user: kratos, message: "The Hands of Death could not defeat me, the Sisters of Fate could not hold me, and you will not see the end of this day!! I WILL HAVE MY REVENGE!!!")
