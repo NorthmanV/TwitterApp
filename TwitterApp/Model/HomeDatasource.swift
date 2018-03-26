@@ -16,7 +16,12 @@ class HomeDatasource: Datasource {
         return [kratos, zeus]
     }()
     
-    let tweets = ["tweet1", "tweet2"]
+    let tweets: [Tweet] = {
+        let kratos = User(name: "Kratos", username: "@godofwar", bioText: "Born in the Greek city-state of Sparta, is the demigod son of Zeus and a mortal woman named Callisto", profileImage: #imageLiteral(resourceName: "profile_image"))
+        let tweet1 = Tweet(user: kratos, message: "The Hands of Death could not defeat me, the Sisters of Fate could not hold me, and you will not see the end of this day!! I WILL HAVE MY REVENGE!!!")
+        let tweet2 = Tweet(user: kratos, message: "You once sacrificed yourself to save Zeus, and now you seek to destroy him?! What has brought about this change?")
+        return [tweet1, tweet2]
+    }()
         
     override func headerClasses() -> [DatasourceCell.Type]? {
         return [UserHeader.self]
@@ -42,6 +47,9 @@ class HomeDatasource: Datasource {
     }
     
     override func item(_ indexPath: IndexPath) -> Any? {
+        if indexPath.section == 1 {
+            return tweets[indexPath.item]
+        }
         return users[indexPath.item]
     }
 }
