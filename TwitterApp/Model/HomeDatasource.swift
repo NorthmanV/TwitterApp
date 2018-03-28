@@ -19,8 +19,10 @@ class HomeDatasource: Datasource, JSONDecodable {
         guard let usersArray = json["users"].array, let tweetsArray = json["tweets"].array else {
             throw NSError(domain: "com.akberovapps", code: 1, userInfo: [NSLocalizedDescriptionKey: "Parsing JSON error"])
         }
-        users = usersArray.map {User(json: $0)}
-        tweets = tweetsArray.map {Tweet(json: $0)}
+//        users = usersArray.map {User(json: $0)}
+//        tweets = tweetsArray.map {Tweet(json: $0)}
+        users = try usersArray.decode()
+        tweets = try tweetsArray.decode()
     }
         
     override func headerClasses() -> [DatasourceCell.Type]? {
@@ -53,3 +55,14 @@ class HomeDatasource: Datasource, JSONDecodable {
         return users[indexPath.item]
     }
 }
+
+extension Collection where Iterator.Element == JSON {
+    func decode<T: JSONDecodable>() throws -> [T] {
+        return try map {try T(json: $0)}
+    }
+}
+
+
+
+
+
