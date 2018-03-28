@@ -19,7 +19,6 @@ class HomeDatasource: Datasource, JSONDecodable {
         guard let usersArray = json["users"].array, let tweetsArray = json["tweets"].array else {
             throw NSError(domain: "com.akberovapps", code: 1, userInfo: [NSLocalizedDescriptionKey: "Parsing JSON error"])
         }
-
         users = usersArray.map {User(json: $0)}
         tweets = tweetsArray.map {Tweet(json: $0)}
     }

@@ -13,12 +13,12 @@ struct User {
     let name: String
     let username: String
     let bioText: String
-    let profileImage: UIImage
+    let profileImageUrl: String
     
     init(json: JSON) {
         name = json["name"].stringValue
         username = json["username"].stringValue
         bioText = json["bio"].stringValue
-        profileImage = UIImage()
+        profileImageUrl = json["profileImageUrl"].stringValue
     }
 }

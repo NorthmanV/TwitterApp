@@ -10,8 +10,8 @@ import LBTAComponents
 
 class TweetCell: DatasourceCell {
     
-    let profileImageView: UIImageView = {
-        let imageView = UIImageView()
+    let profileImageView: CachedImageView = {
+        let imageView = CachedImageView()
         imageView.image = UIImage(named: "profile_image")
         imageView.layer.cornerRadius = 5
         imageView.layer.masksToBounds = true
@@ -51,6 +51,8 @@ class TweetCell: DatasourceCell {
     override var datasourceItem: Any? {
         didSet {
             guard let tweet = datasourceItem as? Tweet else {return}
+            profileImageView.loadImage(urlString: tweet.user.profileImageUrl)
+            
             let attributedText = NSMutableAttributedString(string: tweet.user.name, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 16)])
             let usernameString = "  \(tweet.user.username)\n"
             attributedText.append(NSAttributedString(string: usernameString, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 15) ,NSAttributedStringKey.foregroundColor: UIColor.gray]))
